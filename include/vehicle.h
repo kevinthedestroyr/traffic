@@ -1,8 +1,8 @@
 #ifndef VEHICLE_H
 #define VEHICLE_H
 
-#include "Point.h"
-#include "Driver.h"
+#include "point.h"
+#include "driver.h"
 #include <cmath>
 #include <iostream>
 

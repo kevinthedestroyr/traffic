@@ -1,22 +1,28 @@
 CFLAGS=-g -Iinclude -Wall
 EXEC=traffic
+MKDIR_P = mkdir -p
 
-all: $(EXEC)
+all: directories $(EXEC)
 
-$(EXEC): build/Road.o build/Vehicle.o build/Driver.o build/Main.o
-	g++ build/Road.o build/Vehicle.o build/Driver.o build/Main.o -o $(EXEC) $(CFLAGS)
+directories: build
 
-build/Main.o: src/Main.cpp
-	g++ -c src/Main.cpp -o build/Main.o $(CFLAGS)
+build:
+	$(MKDIR_P) build
 
-build/Vehicle.o: src/Vehicle.cpp
-	g++ -c src/Vehicle.cpp -o build/Vehicle.o $(CFLAGS)
+$(EXEC): build/road.o build/vehicle.o build/driver.o build/main.o
+	g++ build/road.o build/vehicle.o build/driver.o build/main.o -o $(EXEC) $(CFLAGS)
 
-build/Driver.o: src/Driver.cpp
-	g++ -c src/Driver.cpp -o build/Driver.o $(CFLAGS)
+build/main.o: src/main.cc
+	g++ -c src/main.cc -o build/main.o $(CFLAGS)
 
-build/Road.o: src/Road.cpp
-	g++ -c src/Road.cpp -o build/Road.o $(CFLAGS)
+build/vehicle.o: src/vehicle.cc
+	g++ -c src/vehicle.cc -o build/vehicle.o $(CFLAGS)
+
+build/driver.o: src/driver.cc
+	g++ -c src/driver.cc -o build/driver.o $(CFLAGS)
+
+build/road.o: src/road.cc
+	g++ -c src/road.cc -o build/road.o $(CFLAGS)
 
 clean:
 	rm -rf build traffic

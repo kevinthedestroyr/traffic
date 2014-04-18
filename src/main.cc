@@ -1,6 +1,6 @@
-#include "Point.h"
-#include "Vehicle.h"
-#include "Road.h"
+#include "point.h"
+#include "vehicle.h"
+#include "road.h"
 #include <iostream>
 #include <cmath>
 

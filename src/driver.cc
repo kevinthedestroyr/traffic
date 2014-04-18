@@ -1,6 +1,6 @@
-#include "Driver.h"
-#include "Vehicle.h"
-#include "Road.h"
+#include "driver.h"
+#include "vehicle.h"
+#include "road.h"
 
 Driver::Driver(Vehicle* const my_vehicle,
                const float& following_factor,

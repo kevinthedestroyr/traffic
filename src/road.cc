@@ -1,5 +1,5 @@
-#include "Road.h"
-#include "Vehicle.h"
+#include "road.h"
+#include "vehicle.h"
 
 Road::Road()
     : kNumLanes_(kDefaultNumLanes), kLaneWidth_(kDefaultLaneWidth),
