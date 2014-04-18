@@ -24,9 +24,9 @@ class Road {
 
     /* private variables */
     std::vector<Vehicle*> vehicles_;  /* pointers to Vehicles on this road */
-    const int kNumLanes_;             /* In one direction. Only one-way supported */
-    const float kLaneWidth_;
-    const float kShoulderWidth_;
+    const int num_lanes_;              /* In one direction. Only one-way supported */
+    const float lane_width_;
+    const float shoulder_width_;
 };
 
 inline int Road::NumVehicles() const {

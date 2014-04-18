@@ -2,8 +2,8 @@
 #include "vehicle.h"
 
 Road::Road()
-    : kNumLanes_(kDefaultNumLanes), kLaneWidth_(kDefaultLaneWidth),
-      kShoulderWidth_(kDefaultShoulderWidth) {
+    : num_lanes_(kDefaultNumLanes), lane_width_(kDefaultLaneWidth),
+      shoulder_width_(kDefaultShoulderWidth) {
 
 }
 
