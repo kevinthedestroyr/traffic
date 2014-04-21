@@ -33,14 +33,17 @@ class Driver {
     const float following_factor_;          /* multiply by speed -> desired following distance */
     const float speed_offset_;              /* add to speed limit for desired speed */
     float desired_acceleration_;            /* is the driver hitting the gas or break */
+    float desired_turn_;                    /* is the driver turning */
     std::vector<Vehicle*> close_vehicles_;  /* vehicles driver is aware of (think vision) */
     const Road* road_;                      /* pointer to the road this driver is on */
 
     void UpdateDesiredAcceleration();       /* update desired accel based on other vehicles */
+    void UpdateDesiredTurn();               /* update desired turn based on road */
 };
 
 inline void Driver::Update() {
   UpdateDesiredAcceleration();
+  UpdateDesiredTurn();
 }
 
 inline void Driver::SetRoad(const Road* rp) {

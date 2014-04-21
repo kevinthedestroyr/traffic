@@ -18,7 +18,24 @@ Driver::Driver(Vehicle* const my_vehicle)
 
 }
 
-/* TODO Implement this. For now, hold the course */
 void Driver::UpdateDesiredAcceleration() {
-  desired_acceleration_ = 0;
+  /* driver not associated with road yet */
+  if (!road_) {  
+    desired_acceleration_ = 0;
+    return;
+  }
+  /* TODO base acceleration on other cars on the road */
+  /* TODO realistic accelerations */
+  if (vehicle_->velocity() < road_->speed_limit()+speed_offset_) {
+    desired_acceleration_ = 1;
+    return;
+  }
+  if (vehicle_->velocity() > road_->speed_limit()+speed_offset_) {
+    desired_acceleration_ = -1;
+    return;
+  }
+}
+
+void Driver::UpdateDesiredTurn() {
+  desired_turn_ = 0;
 }
