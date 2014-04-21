@@ -3,7 +3,7 @@
 
 Road::Road()
     : num_lanes_(kDefaultNumLanes), lane_width_(kDefaultLaneWidth),
-      shoulder_width_(kDefaultShoulderWidth) {
+      shoulder_width_(kDefaultShoulderWidth), speed_limit_(kDefaultSpeedLimit) {
 
 }
 
