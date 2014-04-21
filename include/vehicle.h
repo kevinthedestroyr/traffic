@@ -23,33 +23,19 @@ class Vehicle {
             const float& width,
             const float& max_velocity);
 
-    /*
-     * Steps the vehicle's position based on the time
-     * given by interval (in seconds).
-     */
+    float velocity() const;
+    float max_velocity() const;
+
     void Step(const float& interval);
-
-    /*
-     * Checks if the position indicated by arguments 
-     * is inside the bounds of this vehicle.
-     * Return true if it is.
-     */
     bool Collision(const Point& other) const;
-
-    /*
-     * Passes road reference to driver so he can
-     * see the vehicles around him.
-     */
     void SetDriversRoad(const Road* rp);
+    void Turn(const float& ang);
 
     /* Return corner positions, taking rotation into account */
     Point topright() const; 
     Point bottomright() const; 
     Point topleft() const; 
     Point bottomleft() const; 
-
-    /* Turns the vehicle by argument given in radians. */
-    void Turn(const float& ang);
 
     friend std::ostream&
         operator<<(std::ostream& os, const Vehicle& v);
@@ -69,8 +55,16 @@ class Vehicle {
     float length_;
     float width_;
     float rotation_;      /* radians - relative to positive x axis */
-    float max_velocity_;  /* m/s */
+    const float max_velocity_;  /* m/s */
     Driver driver_;
 };
+
+inline float Vehicle::velocity() const {
+  return velocity_;
+}
+
+inline float Vehicle::max_velocity() const {
+  return max_velocity_;
+}
 
 #endif  // VEHICLE_H
