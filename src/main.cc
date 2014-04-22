@@ -1,6 +1,7 @@
 #include "point.h"
 #include "vehicle.h"
 #include "road.h"
+#include "display.h"
 #include <iostream>
 #include <cmath>
 
@@ -14,5 +15,11 @@ int main(int argc, char* argv[]) {
   Road road;
   road.AddVehicle(&v1);
   road.AddVehicle(&v2);
+  Display d(road);
+  if (!d.initialized()) {
+    std::cerr << "Failed to initialize SDL window" << std::endl;
+    return -1;
+  }
+  SDL_Delay(3000);
   road.Step(1);
 }

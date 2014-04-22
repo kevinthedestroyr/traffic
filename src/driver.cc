@@ -37,5 +37,6 @@ void Driver::UpdateDesiredAcceleration() {
 }
 
 void Driver::UpdateDesiredTurn() {
+  /* TODO this should be based on desire to change lane */
   desired_turn_ = 0;
 }
