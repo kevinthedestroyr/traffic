@@ -1,4 +1,4 @@
-CFLAGS=-g -Iinclude -Wall -lSDL2 -std=c++0x
+CFLAGS=-g -Iinclude -Wall -lSDL2 -std=c++0x -pthread
 EXEC=traffic
 MKDIR_P = mkdir -p
 
