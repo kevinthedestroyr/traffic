@@ -27,8 +27,8 @@ class Driver {
     Driver(const Driver&);
     void operator=(const Driver&);
 
-    static const float kDefaultFollowingFactor = 10;
-    static const float kDefaultSpeedOffset = 0;
+    static constexpr float kDefaultFollowingFactor = 10;
+    static constexpr float kDefaultSpeedOffset = 0;
     Vehicle* const vehicle_;                /* Pointer to this drivers vehicle */
     const float following_factor_;          /* multiply by speed -> desired following distance */
     const float speed_offset_;              /* add to speed limit for desired speed */

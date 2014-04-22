@@ -45,10 +45,10 @@ class Vehicle {
     Vehicle(const Vehicle&);
     Vehicle operator=(const Vehicle&);
 
-    static const float kDefaultAcceleration = 0;
-    static const float kDefaultLength = 1;
-    static const float kDefaultWidth = 1;
-    static const float kDefaultMaxVelocity = 54.0;
+    static constexpr float kDefaultAcceleration = 0;
+    static constexpr float kDefaultLength = 1;
+    static constexpr float kDefaultWidth = 1;
+    static constexpr float kDefaultMaxVelocity = 54.0;
     Point position_;
     float velocity_;      /* velocity in m/s (direction determined by rotation */
     float acceleration_;  /* acceleration in m/s^2 (direction determined by rotation */

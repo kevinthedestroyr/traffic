@@ -1,7 +1,9 @@
 #include <vector>
 
-/* Following needs to be a define to use with constants (at least until C++11). */
-#define MPS_OVER_MPH 0.44704
+namespace {
+constexpr float kMPSOverMPH = 0.44704;
+constexpr float kMetersPerMile = 1609.34;
+}
 
 class Vehicle;
 
@@ -24,9 +26,10 @@ class Road {
 
     /* private default values */
     static const int kDefaultNumLanes = 2;         /* meters */
-    static const float kDefaultLaneWidth = 2.7;    /* meters, average highway lane */
-    static const float kDefaultShoulderWidth = 1;  /* meters */
-    static const float kDefaultSpeedLimit = MPS_OVER_MPH * 65;
+    static constexpr float kDefaultLaneWidth = 2.7;    /* meters, average highway lane */
+    static constexpr float kDefaultShoulderWidth = 1;  /* meters */
+    static constexpr float kDefaultSpeedLimit = kMPSOverMPH * 65;
+    static constexpr float kDefaultLength = 1 * kMetersPerMile;
 
     /* private variables */
     std::vector<Vehicle*> vehicles_;  /* pointers to Vehicles on this road */
@@ -34,6 +37,7 @@ class Road {
     const float lane_width_;
     const float shoulder_width_;
     const float speed_limit_;         /* m/s (for consistency) */
+    const float length_;              /* meters */
 };
 
 inline int Road::NumVehicles() const {
