@@ -1,4 +1,4 @@
-CFLAGS=-g -Iinclude -Wall
+CFLAGS=-g -Iinclude -Wall -lSDL2 -std=c++0x
 EXEC=traffic
 MKDIR_P = mkdir -p
 
@@ -9,8 +9,8 @@ directories: build
 build:
 	$(MKDIR_P) build
 
-$(EXEC): build/road.o build/vehicle.o build/driver.o build/main.o
-	g++ build/road.o build/vehicle.o build/driver.o build/main.o -o $(EXEC) $(CFLAGS)
+$(EXEC): build/display.o build/road.o build/vehicle.o build/driver.o build/main.o
+	g++ build/display.o build/road.o build/vehicle.o build/driver.o build/main.o -o $(EXEC) $(CFLAGS)
 
 build/main.o: src/main.cc
 	g++ -c src/main.cc -o build/main.o $(CFLAGS)
@@ -23,6 +23,9 @@ build/driver.o: src/driver.cc
 
 build/road.o: src/road.cc
 	g++ -c src/road.cc -o build/road.o $(CFLAGS)
+
+build/display.o: src/display.cc
+	g++ -c src/display.cc -o build/display.o $(CFLAGS)
 
 clean:
 	rm -rf build traffic
