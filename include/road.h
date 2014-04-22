@@ -25,7 +25,7 @@ class Road {
     Road operator=(const Road&);
 
     /* private default values */
-    static const int kDefaultNumLanes = 2;         /* meters */
+    static constexpr int kDefaultNumLanes = 2;         /* meters */
     static constexpr float kDefaultLaneWidth = 2.7;    /* meters, average highway lane */
     static constexpr float kDefaultShoulderWidth = 1;  /* meters */
     static constexpr float kDefaultSpeedLimit = kMPSOverMPH * 65;

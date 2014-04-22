@@ -13,8 +13,8 @@ class Display {
     ~Display();
     bool initialized() const;
   private:
-    static const int kDefaultWindowWidth = 640;
-    static const int kDefaultWindowHeight = 480;
+    static constexpr int kDefaultWindowWidth = 640;
+    static constexpr int kDefaultWindowHeight = 480;
 
     const Road& road_;
     SDL_Window *window_;
