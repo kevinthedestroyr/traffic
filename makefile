@@ -1,4 +1,5 @@
-CFLAGS=-g -Iinclude -Wall -lSDL2 -std=c++0x -pthread
+CFLAGS=-g -Iinclude -Wall -std=c++0x
+LFLAGS=-lSDL2 -pthread
 EXEC=traffic
 MKDIR_P = mkdir -p
 
@@ -10,7 +11,7 @@ build:
 	$(MKDIR_P) build
 
 $(EXEC): build/display.o build/road.o build/vehicle.o build/driver.o build/main.o
-	g++ build/display.o build/road.o build/vehicle.o build/driver.o build/main.o -o $(EXEC) $(CFLAGS)
+	g++ build/display.o build/road.o build/vehicle.o build/driver.o build/main.o -o $(EXEC) $(LFLAGS)
 
 build/main.o: src/main.cc
 	g++ -c src/main.cc -o build/main.o $(CFLAGS)
