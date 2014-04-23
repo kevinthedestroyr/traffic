@@ -19,6 +19,10 @@ class Road {
     int NumVehicles() const;  /* returns number of vehicles currently on road */
 
     float speed_limit() const;
+
+    typedef std::vector<Vehicle*>::iterator VehicleIterator;
+    VehicleIterator VehicleIteratorBegin();
+    VehicleIterator VehicleIteratorEnd();
   private:
     /* disallow copy and assign */
     Road(const Road&);
@@ -46,4 +50,12 @@ inline int Road::NumVehicles() const {
 
 inline float Road::speed_limit() const {
   return speed_limit_;
+}
+
+inline Road::VehicleIterator Road::VehicleIteratorBegin() {
+  return vehicles_.begin();
+}
+
+inline Road::VehicleIterator Road::VehicleIteratorEnd() {
+  return vehicles_.end();
 }

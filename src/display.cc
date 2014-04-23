@@ -1,23 +1,26 @@
 #include "display.h"
 #include "road.h"
 #include <iostream>
+#include <ctime>
 
 Display::Display(const Road& r,
                  const int& window_width,
                  const int& window_height)
     : road_(r), window_(NULL), surface_(NULL), 
+      refresh_rate_(kDefaultRefreshRate),
       window_width_(window_width),
       window_height_(window_height),
-      initialized_(false) {
-  Initialize();
+      initialized_(false), quit_(false),
+      display_thread_p_(NULL) {
 }
 
 Display::Display(const Road& r)
     : road_(r), window_(NULL), surface_(NULL), 
+      refresh_rate_(kDefaultRefreshRate),
       window_width_(kDefaultWindowWidth),
       window_height_(kDefaultWindowHeight),
-      initialized_(false) {
-  Initialize();
+      initialized_(false), quit_(false),
+      display_thread_p_(NULL) {
 }
 
 Display::~Display() {
@@ -60,4 +63,34 @@ void Display::Initialize() {
   SDL_FillRect(surface_, FILL_ALL, SDL_MapRGB(surface_->format, 0, 0, 0));
   SDL_UpdateWindowSurface(window_);
   initialized_ = true;
+}
+
+void Display::DisplayLoop() {
+  while(!quit_) {
+    /* TODO process vehicles and display them */
+    usleep(1e6 / static_cast<float>(refresh_rate_));
+  }
+}
+
+bool Display::Start() {
+  if (display_thread_p_) {
+    std::cerr << "Display::Start - Display thread already exists. Not starting another.";
+    std::cerr << std::endl;
+    return false;
+  }
+  Initialize();
+  if (!initialized_) {
+    return false;
+  }
+  display_thread_p_ = new std::thread(&Display::DisplayLoop, this);
+  return true;
+}
+
+void Display::Stop() {
+  quit_ = true;
+  if (display_thread_p_) {
+    display_thread_p_->join();
+    delete display_thread_p_;
+    display_thread_p_ = NULL;
+  }
 }

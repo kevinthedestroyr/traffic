@@ -4,9 +4,10 @@
 #include "display.h"
 #include <iostream>
 #include <cmath>
+#include <ctime>
 
 namespace {
-  const float PI = 3.14159265359;
+constexpr float PI = 3.14159265359;
 }
 
 int main(int argc, char* argv[]) {
@@ -16,10 +17,17 @@ int main(int argc, char* argv[]) {
   road.AddVehicle(&v1);
   road.AddVehicle(&v2);
   Display d(road);
-  if (!d.initialized()) {
+  bool started = d.Start();
+  if (!started) {
     std::cerr << "Failed to initialize SDL window" << std::endl;
     return -1;
   }
-  SDL_Delay(3000);
   road.Step(1);
+  for (Road::VehicleIterator it = road.VehicleIteratorBegin();
+       it != road.VehicleIteratorEnd();
+       it++) {
+    std::cout << **it << std::endl;
+  }
+  usleep(2e6);
+  d.Stop();
 }
