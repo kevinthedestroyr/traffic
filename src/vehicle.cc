@@ -47,13 +47,6 @@ void Vehicle::SetDriversRoad(const Road* rp) {
   driver_.SetRoad(rp);
 }
 
-Point Vehicle::topright() const {
-  Point relpoint(length_/2, width_/2);
-  PolarPoint p(relpoint);
-  p.AddAngle(rotation_);
-  return Point(p) + position_;
-}
-
 void Vehicle::Turn(const float& theta) {
   /* TODO accurate turning radius */
   /* TODO limits on turning */

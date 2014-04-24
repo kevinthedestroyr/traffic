@@ -1,9 +1,11 @@
 /* provide visual display for traffic simulation using SDL library */
 
 #include "SDL2/SDL.h"
-#include <thread>
+#include <cstdint>
+#include <vector>
 
 class Road;
+class Vehicle;
 
 class Display {
   public:
@@ -12,28 +14,33 @@ class Display {
             const int& window_width,
             const int& window_height);
     ~Display();
-    bool Start();
-    void Stop();
-    bool initialized() const;
+    bool Initialize();
+    void Update();
+    void GetVehicleDisplayPosition(const Vehicle& v, int* x, int* y);
   private:
+    /* dissallow copy and assign */
+    Display(const Display&);
+    Display& operator=(const Display&);
     static constexpr int kDefaultWindowWidth = 640;
     static constexpr int kDefaultWindowHeight = 480;
     static constexpr int kDefaultRefreshRate = 30;    /* frames per second */
+    static constexpr int kDefaultWindowColorR = 255;
+    static constexpr int kDefaultWindowColorG = 255;
+    static constexpr int kDefaultWindowColorB = 255;
+    static constexpr int kDefaultVehicleColorR = 0;
+    static constexpr int kDefaultVehicleColorG = 0;
+    static constexpr int kDefaultVehicleColorB = 0;
 
     const Road& road_;
     SDL_Window *window_;
     SDL_Surface *surface_;
+    uint32_t window_color_;
+    uint32_t vehicle_color_;
     const int refresh_rate_;  /* frames per second */
     const int window_width_;
     const int window_height_;
-    bool initialized_;
-    bool quit_;
-    std::thread* display_thread_p_;
+    std::vector<Vehicle*> vehicles_;
 
-    void Initialize();
     void DisplayLoop();
 };
 
-inline bool Display::initialized() const {
-  return initialized_;
-}

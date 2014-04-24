@@ -31,11 +31,7 @@ class Vehicle {
     void SetDriversRoad(const Road* rp);
     void Turn(const float& ang);
 
-    /* Return corner positions, taking rotation into account */
-    Point topright() const; 
-    Point bottomright() const; 
-    Point topleft() const; 
-    Point bottomleft() const; 
+    Point position() const;
 
     friend std::ostream&
         operator<<(std::ostream& os, const Vehicle& v);
@@ -65,6 +61,10 @@ inline float Vehicle::velocity() const {
 
 inline float Vehicle::max_velocity() const {
   return max_velocity_;
+}
+
+inline Point Vehicle::position() const {
+  return position_;
 }
 
 #endif  // VEHICLE_H

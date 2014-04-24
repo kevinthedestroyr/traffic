@@ -13,16 +13,13 @@ class Road {
     Road();
 
     /* public functions */
-    void Step(const float& interval);    /* steps all vehicles on road to next state */
-    void AddVehicle(Vehicle* vp);        /* adds a vehicle to the road */
-    void RemoveVehicle(Vehicle* vp);     /* removes vehicle from road */
-    int NumVehicles() const;  /* returns number of vehicles currently on road */
+    void Step(const float& interval);           /* steps all vehicles on road to next state */
+    void AddVehicle(Vehicle* vp);               /* adds a vehicle to the road */
+    void RemoveVehicle(Vehicle* vp);            /* removes vehicle from road */
+    int NumVehicles() const;                    /* returns number of vehicles currently on road */
+    std::vector<Vehicle*> GetVehicles() const;  /* returns copy of vehicles data */
 
     float speed_limit() const;
-
-    typedef std::vector<Vehicle*>::iterator VehicleIterator;
-    VehicleIterator VehicleIteratorBegin();
-    VehicleIterator VehicleIteratorEnd();
   private:
     /* disallow copy and assign */
     Road(const Road&);
@@ -52,10 +49,6 @@ inline float Road::speed_limit() const {
   return speed_limit_;
 }
 
-inline Road::VehicleIterator Road::VehicleIteratorBegin() {
-  return vehicles_.begin();
-}
-
-inline Road::VehicleIterator Road::VehicleIteratorEnd() {
-  return vehicles_.end();
+inline std::vector<Vehicle*> Road::GetVehicles() const {
+  return vehicles_;
 }
