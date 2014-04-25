@@ -12,6 +12,7 @@
  */
 class Vehicle {
   public:
+    Vehicle(const float& v);
     Vehicle(const Point& p,
             const float& v,
             const float& rotation);
@@ -32,6 +33,11 @@ class Vehicle {
     void Turn(const float& ang);
 
     Point position() const;
+    void position(const Point& p);
+    float rotation() const;
+    void rotation(const float& r);
+    float length() const;
+    float width() const;
 
     friend std::ostream&
         operator<<(std::ostream& os, const Vehicle& v);
@@ -42,15 +48,16 @@ class Vehicle {
     Vehicle operator=(const Vehicle&);
 
     static constexpr float kDefaultAcceleration = 0;
-    static constexpr float kDefaultLength = 1;
-    static constexpr float kDefaultWidth = 1;
+    static constexpr float kDefaultRotation = 0;
+    static constexpr float kDefaultLength = 4.2;
+    static constexpr float kDefaultWidth = 1.83;
     static constexpr float kDefaultMaxVelocity = 54.0;
     Point position_;
-    float velocity_;      /* velocity in m/s (direction determined by rotation */
-    float acceleration_;  /* acceleration in m/s^2 (direction determined by rotation */
+    float velocity_;            /* velocity in m/s (direction determined by rotation */
+    float acceleration_;        /* acceleration in m/s^2 (direction determined by rotation */
     float length_;
     float width_;
-    float rotation_;      /* radians - relative to positive x axis */
+    float rotation_;            /* radians - relative to positive x axis */
     const float max_velocity_;  /* m/s */
     Driver driver_;
 };
@@ -65,6 +72,25 @@ inline float Vehicle::max_velocity() const {
 
 inline Point Vehicle::position() const {
   return position_;
+}
+
+inline void Vehicle::position(const Point& p) {
+  position_ = p;
+}
+
+inline float Vehicle::rotation() const {
+  return rotation_;
+}
+inline void Vehicle::rotation(const float& r) {
+  rotation_ = r;
+}
+
+inline float Vehicle::length() const {
+  return length_;
+}
+
+inline float Vehicle::width() const {
+  return width_;
 }
 
 #endif  // VEHICLE_H

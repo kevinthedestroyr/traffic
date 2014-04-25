@@ -12,15 +12,17 @@ Display::Display(const Road& r,
     : road_(r), window_(NULL), surface_(NULL), 
       refresh_rate_(kDefaultRefreshRate),
       window_width_(window_width),
-      window_height_(window_height) {
+      window_height_(window_height),
+      pixels_per_meter_(window_width_ / r.length()) {
 }
 
 Display::Display(const Road& r)
     : road_(r), window_(NULL), surface_(NULL), 
       refresh_rate_(kDefaultRefreshRate),
       window_width_(kDefaultWindowWidth),
-      window_height_(kDefaultWindowHeight) {
-      
+      window_height_(kDefaultWindowHeight),
+      pixels_per_meter_(window_width_ / r.length()) {
+  std::cout << "pixels_per_meter_: " << pixels_per_meter_ << std::endl;      
 }
 
 Display::~Display() {
@@ -89,8 +91,8 @@ void Display::Update() {
     SDL_Rect vehicle_rect; 
     vehicle_rect.x = x;
     vehicle_rect.y = y;
-    vehicle_rect.w = 10;
-    vehicle_rect.h = 10;
+    vehicle_rect.w = (vp->length()) * pixels_per_meter_;
+    vehicle_rect.h = (vp->width()) * pixels_per_meter_;
     SDL_FillRect(surface_, &vehicle_rect, vehicle_color_);
   }
   SDL_UpdateWindowSurface(window_);
@@ -99,6 +101,6 @@ void Display::Update() {
 
 void Display::GetVehicleDisplayPosition(const Vehicle& v, int* x, int* y) {
   Point p = v.position();
-  *x = static_cast<int>(p.x());
-  *y = static_cast<int>(p.y());
+  *x = static_cast<int>(p.x() * pixels_per_meter_);
+  *y = static_cast<int>(p.y() * pixels_per_meter_) + (window_height_ / 2);
 }

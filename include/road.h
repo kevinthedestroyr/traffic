@@ -20,6 +20,7 @@ class Road {
     std::vector<Vehicle*> GetVehicles() const;  /* returns copy of vehicles data */
 
     float speed_limit() const;
+    float length() const;
   private:
     /* disallow copy and assign */
     Road(const Road&);
@@ -30,7 +31,7 @@ class Road {
     static constexpr float kDefaultLaneWidth = 2.7;    /* meters, average highway lane */
     static constexpr float kDefaultShoulderWidth = 1;  /* meters */
     static constexpr float kDefaultSpeedLimit = kMPSOverMPH * 65;
-    static constexpr float kDefaultLength = 1 * kMetersPerMile;
+    static constexpr float kDefaultLength = 500;
 
     /* private variables */
     std::vector<Vehicle*> vehicles_;  /* pointers to Vehicles on this road */
@@ -51,4 +52,8 @@ inline float Road::speed_limit() const {
 
 inline std::vector<Vehicle*> Road::GetVehicles() const {
   return vehicles_;
+}
+
+inline float Road::length() const {
+  return length_;
 }

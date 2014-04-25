@@ -11,8 +11,8 @@ constexpr float PI = 3.14159265359;
 }
 
 int main(int argc, char* argv[]) {
-  Vehicle v2(Point(0, 0), 60, 0);
-  Vehicle v1(Point(0, 20), 0, 0);
+  Vehicle v2(Point(0, 0), 10, 0);
+  Vehicle v1(Point(10, 3), 0, 0);
   Road road;
   road.AddVehicle(&v1);
   road.AddVehicle(&v2);
@@ -22,9 +22,9 @@ int main(int argc, char* argv[]) {
     std::cerr << "Failed to initialize SDL window" << std::endl;
     return -1;
   }
-  for (int i = 0; i < 3e2; ++i) {
+  for (int i = 0; i < 4000; ++i) {
     d.Update();
-    road.Step(0.1);
-    usleep(1e4);
+    road.Step(0.01);
+    usleep(1e3);
   }
 }

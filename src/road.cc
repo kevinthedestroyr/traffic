@@ -9,9 +9,17 @@ Road::Road()
 }
 
 void Road::Step(const float& interval) {
+  std::vector<Vehicle*> vehicles_to_delete;
   for (std::vector<Vehicle*>::iterator it = vehicles_.begin();
        it != vehicles_.end(); ++it) {
     (*it)->Step(interval);
+    Point p = (*it)->position();
+    if (p.x() > length_) {
+      vehicles_to_delete.push_back(*it);
+    }
+  }
+  for (auto vp : vehicles_to_delete) {
+    RemoveVehicle(vp);
   }
 }
 
@@ -21,6 +29,7 @@ void Road::AddVehicle(Vehicle* vp) {
 }
 
 void Road::RemoveVehicle(Vehicle* vp) {
+  std::cout << "Removing Vehicle!!!" << std::endl;
   for (std::vector<Vehicle*>::iterator it = vehicles_.begin();
        it != vehicles_.end(); ++it) {
     if (*it == vp) {

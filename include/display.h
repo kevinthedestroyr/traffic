@@ -21,8 +21,8 @@ class Display {
     /* dissallow copy and assign */
     Display(const Display&);
     Display& operator=(const Display&);
-    static constexpr int kDefaultWindowWidth = 640;
-    static constexpr int kDefaultWindowHeight = 480;
+    static constexpr int kDefaultWindowWidth = 1280;
+    static constexpr int kDefaultWindowHeight = 100;
     static constexpr int kDefaultRefreshRate = 30;    /* frames per second */
     static constexpr int kDefaultWindowColorR = 255;
     static constexpr int kDefaultWindowColorG = 255;
@@ -40,7 +40,7 @@ class Display {
     const int window_width_;
     const int window_height_;
     std::vector<Vehicle*> vehicles_;
+    const float pixels_per_meter_;
 
-    void DisplayLoop();
 };
 

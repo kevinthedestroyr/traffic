@@ -1,6 +1,14 @@
 #include "vehicle.h"
 #include <iostream>
 
+Vehicle::Vehicle(const float& velocity)
+    : position_(Point(0,0)), velocity_(velocity),
+      acceleration_(kDefaultAcceleration), length_(kDefaultLength),
+      width_(kDefaultWidth), rotation_(kDefaultRotation),
+      max_velocity_(kDefaultMaxVelocity), driver_(this) {
+}
+    
+
 Vehicle::Vehicle(
     const Point& position,
     const float& velocity,
