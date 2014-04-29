@@ -16,7 +16,7 @@ class Display {
     ~Display();
     bool Initialize();
     void Update();
-    void GetVehicleDisplayPosition(const Vehicle& v, int* x, int* y);
+    void GetVehicleDisplayRect(const Vehicle& v, SDL_Rect* vehicle_rect);
   private:
     /* dissallow copy and assign */
     Display(const Display&);

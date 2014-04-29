@@ -86,21 +86,18 @@ void Display::Update() {
   /* populate new vehicle positions */
   vehicles_ = road_.GetVehicles();
   for (const auto& vp : vehicles_) {
-    int x, y;
-    GetVehicleDisplayPosition(*vp, &x, &y);
-    SDL_Rect vehicle_rect; 
-    vehicle_rect.x = x;
-    vehicle_rect.y = y;
-    vehicle_rect.w = (vp->length()) * pixels_per_meter_;
-    vehicle_rect.h = (vp->width()) * pixels_per_meter_;
+    SDL_Rect vehicle_rect;
+    GetVehicleDisplayRect(*vp, &vehicle_rect); 
     SDL_FillRect(surface_, &vehicle_rect, vehicle_color_);
   }
   SDL_UpdateWindowSurface(window_);
 }
 
 
-void Display::GetVehicleDisplayPosition(const Vehicle& v, int* x, int* y) {
+void Display::GetVehicleDisplayRect(const Vehicle& v, SDL_Rect* r) {
   Point p = v.position();
-  *x = static_cast<int>(p.x() * pixels_per_meter_);
-  *y = static_cast<int>(p.y() * pixels_per_meter_) + (window_height_ / 2);
+  r->x = static_cast<int>(p.x() * pixels_per_meter_);
+  r->y = static_cast<int>(p.y() * pixels_per_meter_) + (window_height_ / 2);
+  r->w = (v.length()) * pixels_per_meter_;
+  r->h = (v.width()) * pixels_per_meter_;
 }

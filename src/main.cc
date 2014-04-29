@@ -11,20 +11,22 @@ constexpr float PI = 3.14159265359;
 }
 
 int main(int argc, char* argv[]) {
-  Vehicle v2(Point(0, 0), 10, 0);
-  Vehicle v1(Point(10, 3), 0, 0);
   Road road;
-  road.AddVehicle(&v1);
-  road.AddVehicle(&v2);
   Display d(road);
   bool started = d.Initialize();
   if (!started) {
     std::cerr << "Failed to initialize SDL window" << std::endl;
     return -1;
   }
-  for (int i = 0; i < 4000; ++i) {
+  for (int i = 0; i < 5000; ++i) {
+    if (i % 100 == 0) {
+      road.AddVehicle(new Vehicle(Point(0,0), 10, 0));
+    }
     d.Update();
     road.Step(0.01);
+    if (road.NumVehicles() <= 0) {
+      break;
+    }
     usleep(1e3);
   }
 }
