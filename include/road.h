@@ -1,7 +1,6 @@
 #include "common.h"
 #include <vector>
 
-
 class Vehicle;
 
 class Road {
