@@ -48,7 +48,16 @@ void Vehicle::Step(const float& interval) {
 
   /* TODO check validity of driver acceleration */
   driver_.Update();
-  acceleration_ = driver_.desired_acceleration();
+  float driver_acceleration = driver_.desired_acceleration();
+  if (driver_acceleration > 0) {
+    acceleration_ = driver_acceleration < kDefaultMaxAcceleration
+                    ? driver_acceleration
+                    : kDefaultMaxAcceleration;
+  } else {  /* slowing down */
+    acceleration_ = driver_acceleration > kDefaultMaxDeceleration
+                    ? driver_acceleration
+                    : kDefaultMaxDeceleration;
+  }
 }
 
 void Vehicle::SetDriversRoad(const Road* rp) {
