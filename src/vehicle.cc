@@ -46,7 +46,6 @@ void Vehicle::Step(const float& interval) {
       velocity_ = velocity_new;
   }
 
-  /* TODO check validity of driver acceleration */
   driver_.Update();
   float driver_acceleration = driver_.desired_acceleration();
   if (driver_acceleration > 0) {
