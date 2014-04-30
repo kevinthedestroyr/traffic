@@ -47,6 +47,10 @@ void Driver::UpdateDesiredAcceleration() {
     float following_distance = other_vehicle_tail - vehicle_head;
     if (following_distance < preferred_following_distance) {
         if (vehicle_->velocity() > 0) {
+            /**
+             * decelerate based on percent difference in preferred to actual 
+             * following distance
+             */
             desired_acceleration_ = -1 * ((preferred_following_distance-following_distance)
                                     / preferred_following_distance)
                                     * slow_down_factor_;
