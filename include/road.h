@@ -1,9 +1,6 @@
+#include "common.h"
 #include <vector>
 
-namespace {
-constexpr float kMPSOverMPH = 0.44704;
-constexpr float kMetersPerMile = 1609.34;
-}
 
 class Vehicle;
 

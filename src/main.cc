@@ -19,8 +19,8 @@ int main(int argc, char* argv[]) {
     return -1;
   }
   for (int i = 0; i < 5000; ++i) {
-    if (i % 100 == 0) {
-      road.AddVehicle(new Vehicle(Point(0,0), 10, 0));
+    if (i == 0 || i == 1000) {
+      road.AddVehicle(new Vehicle(Point(0,0), i/50.0f, 0));
     }
     d.Update();
     road.Step(0.01);
