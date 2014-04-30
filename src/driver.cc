@@ -8,19 +8,19 @@ Driver::Driver(Vehicle* const my_vehicle,
                const float& speed_offset,
                const float& slow_down_factor)
     : vehicle_(my_vehicle),
-    following_factor_(following_factor),
-    speed_offset_(speed_offset),
-    slow_down_factor_(slow_down_factor),
-    road_(NULL) {
+      following_factor_(following_factor),
+      speed_offset_(speed_offset),
+      slow_down_factor_(slow_down_factor),
+      road_(NULL) {
   
 }
 
 Driver::Driver(Vehicle* const my_vehicle)
     : vehicle_(my_vehicle),
-    following_factor_(kDefaultFollowingFactor),
-    speed_offset_(kDefaultSpeedOffset),
-    slow_down_factor_(kDefaultSlowDownFactor),
-    road_(NULL) {
+      following_factor_(kDefaultFollowingFactor),
+      speed_offset_(kDefaultSpeedOffset),
+      slow_down_factor_(kDefaultSlowDownFactor),
+      road_(NULL) {
 
 }
 
