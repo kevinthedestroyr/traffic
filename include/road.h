@@ -9,11 +9,12 @@ class Road {
     Road();
 
     /* public functions */
-    void Step(const float& interval);           /* steps all vehicles on road to next state */
-    void AddVehicle(Vehicle* vp);               /* adds a vehicle to the road */
-    void RemoveVehicle(Vehicle* vp);            /* removes vehicle from road */
-    int NumVehicles() const;                    /* returns number of vehicles currently on road */
-    std::vector<Vehicle*> GetVehicles() const;  /* returns copy of vehicles data */
+    void Step(const float& interval);                    /* steps all vehicles on road to next state */
+    bool AddVehicle(Vehicle* vp, const unsigned& lane);  /* adds a vehicle to lane on road, return true if successful, false otherwise */
+    void RemoveVehicle(Vehicle* vp);                     /* removes vehicle from road */
+    int NumVehicles() const;                             /* returns number of vehicles currently on road */
+    std::vector<Vehicle*> GetVehicles() const;           /* returns copy of vehicles data */
+    int GetCurrentLane(const Vehicle*&) const;           /* returns the lane of the given vehicle on road */
 
     float speed_limit() const;
     float length() const;
@@ -36,6 +37,7 @@ class Road {
     const float shoulder_width_;
     const float speed_limit_;         /* m/s (for consistency) */
     const float length_;              /* meters */
+    std::vector<float> lane_centers_;
 };
 
 inline int Road::NumVehicles() const {

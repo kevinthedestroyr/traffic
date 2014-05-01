@@ -1,11 +1,18 @@
 #include "road.h"
 #include "vehicle.h"
+#include <algorithm>
+#include <cmath>
 
 Road::Road()
     : num_lanes_(kDefaultNumLanes), lane_width_(kDefaultLaneWidth),
       shoulder_width_(kDefaultShoulderWidth), speed_limit_(kDefaultSpeedLimit),
       length_(kDefaultLength) {
-
+  for (int i = 0; i < num_lanes_; i++) {
+    float lane_center = shoulder_width_
+                        + static_cast<float>(i)*lane_width_
+                        + 0.5 * lane_width_;
+    lane_centers_.push_back(lane_center);
+  }
 }
 
 void Road::Step(const float& interval) {
@@ -23,9 +30,17 @@ void Road::Step(const float& interval) {
   }
 }
 
-void Road::AddVehicle(Vehicle* vp) {
+bool Road::AddVehicle(Vehicle* vp, const unsigned& lane) {
+  if (lane < 0 || lane >= lane_centers_.size()) {
+    std::cerr << "Could not add vehicle becuase lane ";
+    std::cerr << lane << " does not correspond to a lane on this road (";
+    std::cerr << lane_centers_.size() << " lanes)" << std::endl;
+    return false;
+  }
+  vp->position(Point(vp->position().x(), lane_centers_.at(lane)));
   vp->SetDriversRoad(this);
   vehicles_.push_back(vp);
+  return true;
 }
 
 void Road::RemoveVehicle(Vehicle* vp) {
@@ -37,4 +52,13 @@ void Road::RemoveVehicle(Vehicle* vp) {
       return;
     }
   }
+}
+
+int Road::GetCurrentLane(const Vehicle*& vp) const {
+  std::vector<float> distances(lane_centers_);
+  for (auto distance : distances) {
+    distance = abs(distance - vp->position().y());
+  }
+  std::vector<float>::iterator min_element = std::min_element(distances.begin(), distances.end());
+  return min_element - lane_centers_.begin();
 }

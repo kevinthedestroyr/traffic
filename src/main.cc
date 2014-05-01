@@ -20,10 +20,10 @@ int main(int argc, char* argv[]) {
   }
   for (int i = 0; i < 5000; ++i) {
     if (i == 0) {
-      road.AddVehicle(new Vehicle(Point(0,0), 0, 0));
+      road.AddVehicle(new Vehicle(1), 0);
     }
-    if (i == 1000) {
-        road.AddVehicle(new Vehicle(Point(0,0), 30, 0));
+    if (i == 1200) {
+        road.AddVehicle(new Vehicle(30), 0);
     }
     d.Update();
     road.Step(0.01);

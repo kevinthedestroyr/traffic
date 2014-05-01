@@ -57,8 +57,8 @@ class Vehicle {
     static constexpr float kDefaultRotation = 0;
     static constexpr float kDefaultWidth = 1.83;
     static constexpr float kDefaultMaxVelocity = 54.0;
-    static constexpr float kDefaultMaxAcceleration = 100;  /* m/s/s - engine power / weight */
-    static constexpr float kDefaultMaxDeceleration = -100; /* m/s/s - braking power / weight */
+    static constexpr float kDefaultMaxAcceleration = 10;  /* m/s/s - engine power / weight */
+    static constexpr float kDefaultMaxDeceleration = -10; /* m/s/s - braking power / weight */
     Point position_;
     float velocity_;            /* velocity in m/s (direction determined by rotation */
     float acceleration_;        /* acceleration in m/s^2 (direction determined by rotation */
