@@ -34,9 +34,17 @@ void Driver::UpdateDesiredAcceleration() {
   /* iterate through other vehicles and see if driver needs to slow down */
   std::vector<Vehicle*> vehicles = road_->GetVehicles();
   for (const auto& vp : vehicles) {
+    /* skip self */
+    if (vp == vehicle_) {
+      continue;
+    }
+    /* skip cars that aren't in your lane */
+    if (road_->GetCurrentLane(vp) != road_->GetCurrentLane(vehicle_)) {
+      continue;
+    }
     /* only look at cars in front of you */
-    if (vp == vehicle_ || vp->position().x() < vehicle_->position().x()) {
-        continue;
+    if (vp->position().x() < vehicle_->position().x()) {
+      continue;
     }
     /* TODO account for rotation of vehicle here */
     float other_vehicle_tail = vp->position().x() - vp->length()/2.0f;
