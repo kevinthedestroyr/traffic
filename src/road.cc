@@ -61,6 +61,5 @@ int Road::GetCurrentLane(const Vehicle* vp) const {
     distance = abs(distance - vp->position().y());
   }
   std::vector<float>::iterator min_element = std::min_element(distances.begin(), distances.end());
-  std::cout << "lane: " << min_element-distances.begin() << std::endl;
   return min_element - distances.begin();
 }
