@@ -15,7 +15,9 @@
 namespace {
 constexpr float kMPSOverMPH = 0.44704;
 constexpr float kMetersPerMile = 1609.34;
+constexpr float PI = 3.14159265359;
 }
+
 
 #endif	/* COMMON_H */
 

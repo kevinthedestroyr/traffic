@@ -6,10 +6,6 @@
 #include <cmath>
 #include <ctime>
 
-namespace {
-constexpr float PI = 3.14159265359;
-}
-
 int main(int argc, char* argv[]) {
   Road road;
   Display d(road);
@@ -21,9 +17,11 @@ int main(int argc, char* argv[]) {
   for (int i = 0; i < 5000; ++i) {
     if (i == 0) {
       road.AddVehicle(new Vehicle(1), 0);
+      road.AddVehicle(new Vehicle(5), 1);
     }
     if (i == 1200) {
         road.AddVehicle(new Vehicle(30), 0);
+        road.AddVehicle(new Vehicle(40), 1);
     }
     d.Update();
     road.Step(0.01);
