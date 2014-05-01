@@ -32,6 +32,7 @@ void Road::Step(const float& interval) {
 
 bool Road::AddVehicle(Vehicle* vp, const unsigned& lane) {
   if (lane < 0 || lane >= lane_centers_.size()) {
+    std::cerr << "ERROR: ";
     std::cerr << "Could not add vehicle becuase lane ";
     std::cerr << lane << " does not correspond to a lane on this road (";
     std::cerr << lane_centers_.size() << " lanes)" << std::endl;
@@ -54,11 +55,12 @@ void Road::RemoveVehicle(Vehicle* vp) {
   }
 }
 
-int Road::GetCurrentLane(const Vehicle*& vp) const {
+int Road::GetCurrentLane(const Vehicle* vp) const {
   std::vector<float> distances(lane_centers_);
-  for (auto distance : distances) {
+  for (auto& distance : distances) {
     distance = abs(distance - vp->position().y());
   }
   std::vector<float>::iterator min_element = std::min_element(distances.begin(), distances.end());
-  return min_element - lane_centers_.begin();
+  std::cout << "lane: " << min_element-distances.begin() << std::endl;
+  return min_element - distances.begin();
 }

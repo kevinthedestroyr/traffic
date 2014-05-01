@@ -14,7 +14,7 @@ class Road {
     void RemoveVehicle(Vehicle* vp);                     /* removes vehicle from road */
     int NumVehicles() const;                             /* returns number of vehicles currently on road */
     std::vector<Vehicle*> GetVehicles() const;           /* returns copy of vehicles data */
-    int GetCurrentLane(const Vehicle*&) const;           /* returns the lane of the given vehicle on road */
+    int GetCurrentLane(const Vehicle*) const;           /* returns the lane of the given vehicle on road */
 
     float speed_limit() const;
     float length() const;
