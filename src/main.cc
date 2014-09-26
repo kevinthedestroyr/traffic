@@ -14,14 +14,37 @@ int main(int argc, char* argv[]) {
     std::cerr << "Failed to initialize SDL window" << std::endl;
     return -1;
   }
-  for (int i = 0; i < 5000; ++i) {
+  SDL_Event e;
+  bool quit = false;
+  /* wait for click to start */
+  while(1) {
+    SDL_PollEvent(&e);
+    if (e.type == SDL_QUIT) {
+      quit = true;
+      break;
+    }
+    else if (e.type == SDL_MOUSEBUTTONDOWN) {
+      break;
+    }
+    usleep(1e4);
+  }
+  /* main loop */
+  for (int i = 0; !quit; ++i) {
+    SDL_PollEvent(&e);
+    if (e.type == SDL_QUIT) {
+      break;
+    }
     if (i == 0) {
-      road.AddVehicle(new Vehicle(1), 0);
-      road.AddVehicle(new Vehicle(5), 1);
+      road.AddVehicle(new Vehicle(0), 0);
+      road.AddVehicle(new Vehicle(0), 1);
     }
     if (i == 1200) {
-        road.AddVehicle(new Vehicle(30), 0);
-        road.AddVehicle(new Vehicle(40), 1);
+      road.AddVehicle(new Vehicle(20), 0);
+      road.AddVehicle(new Vehicle(25), 1);
+    }
+    if (i == 1500) {
+      road.AddVehicle(new Vehicle(25), 0);
+      road.AddVehicle(new Vehicle(25), 1);
     }
     d.Update();
     road.Step(0.01);

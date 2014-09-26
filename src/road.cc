@@ -56,9 +56,9 @@ void Road::RemoveVehicle(Vehicle* vp) {
 }
 
 int Road::GetCurrentLane(const Vehicle* vp) const {
-  std::vector<float> distances(lane_centers_);
-  for (auto& distance : distances) {
-    distance = abs(distance - vp->position().y());
+  std::vector<float> distances(lane_centers_.size());
+  for (unsigned i = 0; i < lane_centers_.size(); i++) {
+    distances.at(i) = abs(lane_centers_.at(i) - vp->position().y());
   }
   std::vector<float>::iterator min_element = std::min_element(distances.begin(), distances.end());
   return min_element - distances.begin();
